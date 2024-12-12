@@ -6,7 +6,7 @@ load_dotenv()
 CENSUS_API_KEY = os.getenv('CENSUS_API_KEY')
 
 #### SETUP ------
-year = 2022
+year = 2023
 cws_year = 2024
 cities = ["bridgeport", "hartford", "new_haven", "stamford"]
 fetch_data = f"fetch_data/acs_basic_{year}_fetch_all.rds"
