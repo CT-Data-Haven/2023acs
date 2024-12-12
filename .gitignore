@@ -4,5 +4,7 @@
 .Ruserdata
 .snakemake
 .uploaded
-.meta_downloaded.vscode
+.meta_downloaded
+.vscode
 .env
+flags

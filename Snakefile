@@ -110,9 +110,9 @@ rule release:
         town = rules.calc_acs_towns.output.acs_town,
         nhood = rules.calc_acs_nhoods.output.acs_city,
     output:
-        flag = '.uploaded.json',
+        flag = 'flags/.uploaded.json',
     shell:
-        'bash scripts/upload_gh_release.sh {input.town} {input.nhood}'
+        'bash scripts/upload_gh_release.sh {input.town} {input.nhood} {output.flag}'
 
 #### FINAL OUTPUT ------
 rule distro:
@@ -147,5 +147,6 @@ rule clean:
             to_distro/* \
             fetch_data/* \
             website/* \
-            utils/*.rds
+            utils/*.rds \
+            flags/*
         '''

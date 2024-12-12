@@ -14,24 +14,16 @@ Distribution-ready files are in [`to_distro`](to_distro). CSV file for populatin
 
 ```{r}
 #| label: tree
-#| results: asis
+#| comment: ""
 files <- data.frame(file = paste(".", list.files(c("fetch_data", "output_data", "to_distro", "website"), full.names = TRUE), sep = "/"))
 
-print(data.tree::FromDataFrameTable(files, pathName = "file"))
+data.tree::FromDataFrameTable(files, pathName = "file")
 ```
 
 
 ## Development
 
-Several global functions and other objects are loaded when each script sources `utils/pkgs_utils.R`, including all loaded libraries. There are two global variables for years: `yr` and `cws_yr`, for the ACS endyear and the CWS year, respectively. Those are both taken as positional arguments by `pkgs_utils.R` and passed down to whatever script you want to run. 
-
-For example, on the command line run:
-
-```bash
-Rscript scripts/03_calc_acs_towns.R 2022 2021
-```
-
-to execute that script for ACS year 2022 & CWS year 2021. Similarly, those 2 variables are saved in the snakefile and passed to scripts from there.
+Several global functions and other objects are loaded when each script sources `utils/pkgs_utils.R`, including all loaded libraries. There are two global variables for years: `yr` and `cws_yr`, for the ACS endyear and the CWS year, respectively. Those are both set within the snakefile, and can be taken as positional arguments by `pkgs_utils.R`.
 
 To build the full project in the proper order, on the command line run:
 

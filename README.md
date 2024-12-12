@@ -8,30 +8,31 @@ populating website’s community profiles is in [`website`](website).
 
 ## Output
 
-                              levelName
-
-1 .  
-2 °–output_data  
-3 °–cws_basic_indicators_2024.rds
+                                                levelName
+    1  .                                                 
+    2   ¦--fetch_data                                    
+    3   ¦   °--acs_basic_2023_fetch_all.rds              
+    4   ¦--output_data                                   
+    5   ¦   ¦--acs_nhoods_by_city_2023.rds               
+    6   ¦   ¦--acs_town_basic_profile_2023.csv           
+    7   ¦   ¦--acs_town_basic_profile_2023.rds           
+    8   ¦   °--cws_basic_indicators_2024.rds             
+    9   ¦--to_distro                                     
+    10  ¦   ¦--bridgeport_acs_basic_neighborhood_2023.csv
+    11  ¦   ¦--hartford_acs_basic_neighborhood_2023.csv  
+    12  ¦   ¦--new_haven_acs_basic_neighborhood_2023.csv 
+    13  ¦   ¦--stamford_acs_basic_neighborhood_2023.csv  
+    14  ¦   °--town_acs_basic_distro_2023.csv            
+    15  °--website                                       
+    16      °--5year2023town_profile_expanded_CWS.csv    
 
 ## Development
 
 Several global functions and other objects are loaded when each script
 sources `utils/pkgs_utils.R`, including all loaded libraries. There are
 two global variables for years: `yr` and `cws_yr`, for the ACS endyear
-and the CWS year, respectively. Those are both taken as positional
-arguments by `pkgs_utils.R` and passed down to whatever script you want
-to run.
-
-For example, on the command line run:
-
-``` bash
-Rscript scripts/03_calc_acs_towns.R 2022 2021
-```
-
-to execute that script for ACS year 2022 & CWS year 2021. Similarly,
-those 2 variables are saved in the snakefile and passed to scripts from
-there.
+and the CWS year, respectively. Those are both set within the snakefile,
+and can be taken as positional arguments by `pkgs_utils.R`.
 
 To build the full project in the proper order, on the command line run:
 
