@@ -19,8 +19,15 @@ nhood_lookup <- list(
 # no longer need PUMAs as regions--cwi can call them
 # also keep out COGs
 reg_puma_list <- readRDS("utils/reg_puma_list.rds")
-pumas <- names(reg_puma_list[grepl("^\\d+$", names(reg_puma_list))])
-regions <- reg_puma_list[!names(reg_puma_list) %in% pumas & !grepl("COG", names(reg_puma_list))]
+# pumas <- names(reg_puma_list[grepl("^\\d+$", names(reg_puma_list))])
+pumas <- cwi::xwalk |>
+    distinct(town, puma_fips_cog) |>
+    group_by(puma_fips_cog) |>
+    filter(n() > 1) |>
+    pull(puma_fips_cog) |>
+    unique()
+# regions <- reg_puma_list[!names(reg_puma_list) %in% pumas & !grepl("COG", names(reg_puma_list))]
+regions <- reg_puma_list[grepl("\\D", names(reg_puma_list)) & !grepl("COG", names(reg_puma_list))]
 
 ######################################## FETCH #################################----
 # drop medians for aggregated regions
